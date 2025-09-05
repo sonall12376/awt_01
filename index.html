@@ -1,26 +1,89 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="app">
 <head>
-  <title>Local jQuery</title>
-  <!-- <script src="./jquery-3.7.1.js"></script> -->
-  <!-- Make sure this file exists locally -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script> -->
-   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
+  <meta charset="UTF-8">
+  <title>AWT Progress</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body {
+      background: #f9f9f9;
+      color: #222;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 25px;
+      color: #444;
+    }
+    ul {
+      list-style: none;
+      padding-left: 15px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<body>
-  <h1>Testing Local jQuery</h1>
-  <p>time taken is <span id="time">being estimated</span></p>
-  <script>
-    const start = performance.now();
+<body ng-controller="MainCtrl">
 
-    $(document).ready(function () {
-      const end = performance.now();
-      var timeTaken = end - start;
-      console.log("Local jQuery load time: " + timeTaken.toFixed(2) + " ms");
-      $("#time").html(timeTaken.toFixed(2) + " ms");
-    });
+  <h1>AWT Progress</h1>
+
+  <div ng-repeat="folder in folders">
+    <h2>{{folder.name}}</h2>
+    <ul>
+      <li ng-repeat="file in folder.files" ng-if="file.path.endsWith('.html')">
+        <a ng-href="{{file.path}}">{{file.name}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    angular.module("app", [])
+      .controller("MainCtrl", function($scope) {
+        $scope.folders = [
+          {
+            name: "AJAX",
+            files: [
+              // (example file placeholders, replace with yours if needed)
+              { name: "ajax example", path: "class/AJAX/index.html" }
+            ]
+          },
+          {
+            name: "Angular",
+            files: [
+              { name: "angular expression", path: "class/Angular/angular_expression.html" },
+              { name: "ng-bind example", path: "class/Angular/ng-bind.html" }
+            ]
+          },
+          {
+            name: "Jquery",
+            files: [
+              { name: "Task 1", path: "class/Jquery/Task 1/task1.html" },
+              { name: "Local Example", path: "class/Jquery/Task 2/local.html" },
+              { name: "Remote Example", path: "class/Jquery/Task 2/remote.html" }
+            ]
+          },
+          {
+            name: "Lab Experiments",
+            files: [
+              { name: "Experiment 1", path: "lab/EXP_1_disable_events/index.html" },
+              { name: "Experiment 2", path: "lab/EXP_2_app_in_js/index.html" }
+            ]
+          }
+        ];
+      });
   </script>
 </body>
 </html>
