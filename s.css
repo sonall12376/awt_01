@@ -1,0 +1,65 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #000;  /* Black background */
+    color: #f1f1f1;          /* Light text for contrast */
+}
+
+/* Main Title */
+h1 {
+    font-size: 30px;
+    color: #00ffcc;          /* Neon cyan */
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Folder Section */
+.folder {
+    background: #111;         /* Dark card */
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease-in-out;
+}
+
+.folder:hover {
+    transform: scale(1.02);   /* Small zoom effect on hover */
+}
+
+/* Folder Headings */
+h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    color: #ffcc00;           /* Yellow folder title */
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+/* File List */
+ul {
+    list-style-type: none;
+    padding-left: 10px;
+    margin: 0;
+}
+
+li {
+    margin: 8px 0;
+}
+
+/* Links */
+a {
+    color: #66b2ff;           /* Light blue links */
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff6666;           /* Hover red */
+}
