@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+  <title>Todo List (AngularJS)</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="TodoController">
+  <h2>Todo List (AngularJS)</h2>
+  <input type="text" ng-model="newTask" placeholder="Enter task">
+  <button ng-click="addTask()">Add</button>
+  <ul>
+    <li ng-repeat="task in tasks">
+      {{task}}
+      <button ng-click="deleteTask($index)">Delete</button>
+    </li>
+  </ul>
+<script>
+  angular.module("todoApp", [])
+    .controller("TodoController", function($scope) {
+      // Load tasks from localStorage
+      $scope.tasks = JSON.parse(localStorage.getItem("ngTasks")) || [];
+
+      // Add task
+      $scope.addTask = function() {
+        if ($scope.newTask && $scope.newTask.trim() !== "") {
+          $scope.tasks.push($scope.newTask);
+          $scope.newTask = ""; // clear input
+          localStorage.setItem("ngTasks", JSON.stringify($scope.tasks));
+        }
+      };
+
+      // Delete task
+      $scope.deleteTask = function(index) {
+        $scope.tasks.splice(index, 1);
+        localStorage.setItem("ngTasks", JSON.stringify($scope.tasks));
+      };
+    });
+</script>
