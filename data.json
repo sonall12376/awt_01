@@ -23,6 +23,13 @@
             { "name": "Task 3", "path": "class/Jquery/Task 3/todo.html" }
 
           ]
+        },
+        {
+          "name": "Nodejs",
+          "files": [
+            { "name": "Server.js", "path": "http://localhost:4000/" }
+
+          ]
         }
       ]
     },
@@ -34,7 +41,11 @@
         { "name": "Experiment 3", "path": "lab/Experiment_3/index.html" },
         { "name": "Experiment 4 - Bill", "path": "lab/Experiment_4/bill.html" },
         { "name": "Experiment 4 - Form", "path": "lab/Experiment_4/form.html" },
-        { "name": "Experiment 5&6", "path":"http://localhost:3000" }
+        { "name": "Experiment 5&6", "path":"http://localhost:3000" },
+        { "name": "Experiment 7-cookie", "path":"http://localhost:3000/set-cookie" },
+        { "name": "Experiment 7-session", "path":"http://localhost:3000/" },
+        { "name": "Session-cookie-demo", "path":"http://localhost:3000/" }
+
       ]
     }
   ]
