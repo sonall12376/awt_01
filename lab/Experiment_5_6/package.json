@@ -74,7 +74,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "node server.js",
-    "start": "node server.js"
+    "start": "node lab/Experiment_5_6/server.js"
   },
   "repository": {
     "type": "git",
