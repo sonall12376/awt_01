@@ -44,7 +44,7 @@
         { "name": "Experiment 5&6", "path":"https://awt-01-2.onrender.com" },
         { "name": "Experiment 7-cookie", "path":"lab/Experiment_7/source/cookie-example.js" },
         { "name": "Experiment 7-session", "path":"lab/Experiment_7/source/session-example.js" },
-        { "name": "Session-cookie-demo", "path":"lab/session-cookie-demo/server.js" }
+        { "name": "Session-cookie-demo", "path":" https://awt-01-6.onrender.com" }
 
       ]
     }
