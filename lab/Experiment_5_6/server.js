@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; 
 
 // Hello World endpoint
 app.get('/', (req, res) => {
@@ -76,8 +76,8 @@ app.get('/iterate', (req, res) => {
   res.json({ array, iterations });
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
   console.log('Available endpoints:');
   console.log('  GET / - Hello World');
   console.log('  GET /replace?text=your_text - Replace multiple a\'s with b');
