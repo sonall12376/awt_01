@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+const app = express(); // ✅ create the app first
 const PORT = process.env.PORT || 3000;
 
 app.use(cookieParser());
