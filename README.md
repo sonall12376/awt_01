@@ -933,15 +933,15 @@ app.listen(PORT, () => {
   }
 }
 ```
-### output
+### output-cookie.js
 ![Output Screenshot](Output-awt-lab/exp-7-cookie.1.png) 
-### output
+### output-cookie.js
 ![Output Screenshot](Output-awt-lab/exp-7-cookie.2.png)  
-### output
+### output-cookie.js
 ![Output Screenshot](Output-awt-lab/exp-7-cookie.3.png)  
-### output
+### output-session.js
 ![Output Screenshot](Output-awt-lab/exp-7-session.1.png)  
-### output
+### output-session.js
 ![Output Screenshot](Output-awt-lab/exp-7-session.2.png)  
 
 *Challenges faced:*
