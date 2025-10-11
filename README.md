@@ -817,7 +817,14 @@ app.listen(PORT, () => {
 ```
 
 ### output
-![Output Screenshot](Output-awt-lab/exp-5_6.png)  
+![Output Screenshot](Output-awt-lab/exp-5_6.1.png)
+### output
+![Output Screenshot](Output-awt-lab/exp-5_6.2.png)
+### output
+![Output Screenshot](Output-awt-lab/exp-5_6.3.png)
+### output
+![Output Screenshot](Output-awt-lab/exp-5_6.4.png)
+ 
 
 *Challenges faced:*
 - Configuring Express properly.
@@ -926,11 +933,16 @@ app.listen(PORT, () => {
   }
 }
 ```
-
-
-
 ### output
-![Output Screenshot](Output-awt-lab/exp-7.png)  
+![Output Screenshot](Output-awt-lab/exp-7-cookie.1.png) 
+### output
+![Output Screenshot](Output-awt-lab/exp-7-cookie.2.png)  
+### output
+![Output Screenshot](Output-awt-lab/exp-7-cookie.3.png)  
+### output
+![Output Screenshot](Output-awt-lab/exp-7-session.1.png)  
+### output
+![Output Screenshot](Output-awt-lab/exp-7-session.2.png)  
 
 *Challenges faced:*
 - Configuring session middleware correctly.
