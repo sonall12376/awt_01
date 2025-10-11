@@ -14,12 +14,7 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 5. [Experiment 5](#-experiment-5)
 6. [Experiment 5_6](#-experiment-5_6)
 7. [Experiment 7](#-experiment-7)
-8. [Session-Cookie-Demo](#-session-cookie-demo-inside-lab)
-9. [Class Folder (awt_01)](#-class-folder-awt_01)
-   - [Angular](#-angular)
-   - [jQuery](#-jquery)
-   - [Node.js](#-nodejs)
-10. [Conclusion](#-conclusion)
+8. [Conclusion](#-conclusion)
 
 ---
 
@@ -31,6 +26,154 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 - Creating basic web pages using HTML.
 - Linking CSS and JS files to an HTML document.
 - Handling basic DOM manipulation using JavaScript.
+
+**Code**
+
+#### 🗂 index.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAB EXP 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="s.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>1. Right-Click Disabled</h1>
+        <p>Try right-clicking anywhere on this page. The context menu will not appear.</p>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h1>2. Show/Hide Message</h1>
+        <button id="showBtn">Show Message</button>
+        <button id="hideBtn">Hide Message</button>
+        <div id="messageDiv">
+            <p>Hello! This message can be hidden and shown using the buttons above.</p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <h1>3. Paragraph Color Change on Hover</h1>
+        <p class="hover-para">This paragraph changes color.</p>
+    </div>
+
+    <hr>
+
+    <div class="container" style="height: 1200px;">
+        <h1>4. Scroll to Top</h1>
+        <p>Scroll down this page to see the image in the bottom-right corner. Clicking it will bring you back to the top of the page.</p>
+    </div>
+
+    
+    <img src="C:\Users\hp\Pictures\Screenshots\Screenshot 2025-08-25 231221.png" alt="Scroll to Top" id="scrollToTopBtn">
+
+    <script src="d1.js"></script>
+
+</body>
+</html>
+```
+
+#### 🗂 s.css
+```CSS
+body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding-bottom: 1500px; 
+        }
+        .container {
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: orchid;
+        }
+        p {
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        #messageDiv {
+            padding: 20px;
+            border: 1px solid yellowgreen;
+            background-color:white;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: none; 
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: pink ;
+            color: white;
+        }
+        button:hover {
+            background-color: red;
+        }
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            border: 2px solid beige;
+            border-radius: 50%;
+            background-color: powderblue;
+            box-shadow: 0 4px 6px black;
+        }
+```
+#### 🗂 d1.js
+```JS
+
+$(document).on("selectstart", function(e){ 
+    e.preventDefault();
+});
+
+$(document).on("keydown", function(e) {
+    if (e.ctrlKey && e.keyCode === 67) e.preventDefault();
+});
+
+ $(document).ready(function() {
+            // 1. Disable the right-click menu
+            $(document).on("contextmenu", function(e) {
+                e.preventDefault();
+            });
+
+            // 2. Display and hide a message
+            $("#showBtn").click(function() {
+                $("#messageDiv").show('slow');
+            });
+            $("#hideBtn").click(function() {
+                $("#messageDiv").hide('slow');
+            });
+
+            // 3. Change paragraph color on mouseover
+            $(".hover-para").mouseover(function() {
+                $(this).css("color", "red");
+            });
+            $(".hover-para").mouseout(function() {
+                $(this).css("color", "#333");
+            });
+
+            // 4. Click an image to scroll to the top
+            $("#scrollToTopBtn").click(function() {
+                $("html, body").animate({ scrollTop: 0 }, 'slow');
+            })
+
+        });
+```
+### output
+![Output Screenshot]("C:\Users\hp\Pictures\Camera Roll\exp-1.png")  
 
 *Challenges faced:*
 - Understanding how external JS and CSS files are connected.
