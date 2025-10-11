@@ -173,7 +173,7 @@ $(document).on("keydown", function(e) {
         });
 ```
 ### output
-![Output Screenshot]("C:\Users\hp\Pictures\Camera Roll\exp-1.png")  
+![Output Screenshot](Pictures\Camera Roll\exp-1.png)  
 
 *Challenges faced:*
 - Understanding how external JS and CSS files are connected.
@@ -268,59 +268,6 @@ $(document).on("keydown", function(e) {
 *Challenges faced:*
 - Configuring session middleware correctly.
 - Debugging cookie handling issues.
-
----
-
-## 🍪 Session-Cookie-Demo (inside Lab)
-*Topic:* Demonstration of Session and Cookie Management  
-*Files:* server.js, package.json, node_modules/
-
-*What I learned:*
-- Setting and retrieving cookies using Express.
-- Implementing session-based authentication.
-- Practical use of session middleware.
-
-*Challenges faced:*
-- Handling session expiration.
-- Testing cookie behavior across browsers.
-
----
-
-## 📚 Class Folder (awt_01)
-
-### 🔹 Angular
-*What I learned:*
-- Basics of AngularJS framework.
-- Using directives like ng-model, ng-bind, and custom directives.
-- Creating interactive web apps using two-way data binding.
-
-*Challenges faced:*
-- Understanding scope and binding concepts.
-- Managing multiple components on one page.
-
----
-
-### 🔹 jQuery
-*What I learned:*
-- DOM manipulation using jQuery selectors.
-- Handling events like click, hover, and animations.
-- Using jQuery AJAX for data loading.
-
-*Challenges faced:*
-- Linking the jQuery library correctly.
-- Debugging chained jQuery functions.
-
----
-
-### 🔹 Node.js
-*What I learned:*
-- Creating multiple server versions (server-step1.js to server-step3.js).
-- Serving static files and handling routes.
-- Managing package.json and dependencies.
-
-*Challenges faced:*
-- Understanding different server setup methods.
-- Debugging request-handling logic.
 
 ---
 
