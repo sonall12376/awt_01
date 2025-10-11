@@ -607,6 +607,7 @@ angular.module('tableApp', [])
   </script>
 </body>
 </html>
+```
 
 ### output-bill
 ![Output Screenshot](Output-awt-lab/exp-4.1.png)
