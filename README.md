@@ -173,7 +173,7 @@ $(document).on("keydown", function(e) {
         });
 ```
 ### output
-![Output Screenshot](Camera Roll\exp-1.png)  
+![Output Screenshot](Output-awt-lab/exp-1.png)  
 
 *Challenges faced:*
 - Understanding how external JS and CSS files are connected.
