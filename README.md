@@ -305,7 +305,7 @@ button {
 
 ---
 
-## 🧪 Experiment 3
+## Experiment 3
 *Topic:* Introduction to Node.js  
 *Files:* index.html, app.js
 
