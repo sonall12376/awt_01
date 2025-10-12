@@ -1,5 +1,5 @@
 # awt_01
-# 💻 Web Technology Lab – Experiments Summary
+# Web Technology Lab – Experiments Summary
 
 This repository contains all experiments and classwork done as part of the *Advanced Web Technology (AWT)* lab.  
 Each experiment focuses on different web technologies including HTML, CSS, JavaScript, jQuery, AngularJS, and Node.js.
@@ -18,7 +18,7 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 
 ---
 
-## 🧪 Experiment 1
+## Experiment 1
 *Topic:* Basic HTML, CSS, and JavaScript Integration  
 *Files:* index.html, d1.js, s.css
 
@@ -29,7 +29,7 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 
 **Code**
 
-#### 🗂 index.html
+#### index.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +81,7 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 </html>
 ```
 
-#### 🗂 s.css
+#### s.css
 ```CSS
 body {
             font-family: Arial, sans-serif;
@@ -132,7 +132,7 @@ body {
             box-shadow: 0 4px 6px black;
         }
 ```
-#### 🗂 d1.js
+#### d1.js
 ```JS
 
 $(document).on("selectstart", function(e){ 
@@ -181,7 +181,7 @@ $(document).on("keydown", function(e) {
 
 ---
 
-## 🧪 Experiment 2
+## Experiment 2
 *Topic:* Advanced JavaScript – Events and DOM  
 *Files:* index.html, d2.js, s.css
 
@@ -192,7 +192,7 @@ $(document).on("keydown", function(e) {
 
 **Code**
 
-#### 🗂 index.html
+#### index.html
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -232,7 +232,7 @@ $(document).on("keydown", function(e) {
 </html>
 ```
 
-#### 🗂 s.css
+#### s.css
 ```CSS
 body {
   font-family: Arial, sans-serif;
@@ -265,7 +265,7 @@ button {
   color: white;
 }
 ```
-#### 🗂 d2.js
+#### d2.js
 ```JS
 
  $(document).ready(function(){
@@ -317,7 +317,7 @@ button {
 
 **Code**
 
-#### 🗂 index.html
+#### index.html
 ```html
 <!doctype html>
 <html ng-app="tableApp">
@@ -400,7 +400,7 @@ button {
 </html>
 
 ```
-#### 🗂 app.js
+#### app.js
 ```JS
 
 angular.module('tableApp', [])
@@ -429,7 +429,7 @@ angular.module('tableApp', [])
 
 ---
 
-## 🧪 Experiment 4
+##  Experiment 4
 *Topic:* HTML Forms and Data Handling  
 *Files:* bill.html, form.html
 
@@ -440,7 +440,7 @@ angular.module('tableApp', [])
 
 **Code**
 
-#### 🗂 bill.html
+####  bill.html
 ```html
 <!DOCTYPE html>
 <html lang="en" ng-app="billApp">
@@ -529,7 +529,7 @@ angular.module('tableApp', [])
 </html>
 
 ```
-#### 🗂 form.html
+#### form.html
 ```html
 <!DOCTYPE html>
 <html lang="en" ng-app="formApp">
@@ -622,7 +622,7 @@ angular.module('tableApp', [])
 ---
 
 
-### 🧪 Experiment 5_6
+###  Experiment 5_6
 *Topic:* Express.js and Modular Node.js Applications  
 *Files:*  server.js, package.json
 
@@ -633,7 +633,7 @@ angular.module('tableApp', [])
 
 **Code**
 
-#### 🗂 server.js 
+#### server.js 
 ```JS
 const express = require('express');
 const app = express();
@@ -722,7 +722,7 @@ app.listen(PORT, () => {
   console.log('  GET /iterate - Array iteration examples');
 });
 ```
-#### 🗂 package.json 
+#### package.json 
 ```JSON
 {
   "name": "nodeja-lab",
@@ -832,7 +832,7 @@ app.listen(PORT, () => {
 
 ---
 
-## 🧪 Experiment 7
+##  Experiment 7
 *Topic:* Node.js Sessions and Cookies  
 *Files:* source/, server.js, package.json
 
@@ -843,7 +843,7 @@ app.listen(PORT, () => {
 
 **Code**
 
-#### 🗂 cookie-example.js
+#### cookie-example.js
 ```JS
 
 const express = require('express');
@@ -875,7 +875,7 @@ app.listen(PORT, () => {
 
 ```
 
-#### 🗂 session-example.js
+####  session-example.js
 ```JS
 const express = require('express');
 const session = require('express-session');
@@ -913,7 +913,7 @@ app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
 });
 ```
-### 🗂 package.json
+### package.json
 ```JSON
 {
   "name": "experiment_7",
@@ -950,7 +950,7 @@ app.listen(PORT, () => {
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 This lab helped me gain hands-on experience in *front-end and back-end web development*.  
 I learned how to:
 - Design interactive front-end applications (HTML, CSS, JS, jQuery, Angular).
