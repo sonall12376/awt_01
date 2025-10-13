@@ -13,7 +13,7 @@
             { "name": "custom directive", "path": "class/Angular/custom_directive.html" },
             { "name": "to-do list", "path": "class/Angular/todo.html" }
           ]
-        },
+        }, 
         {
           "name": "Jquery",
           "files": [
