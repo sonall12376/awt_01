@@ -1,0 +1,6 @@
+exclude:
+  - Nodejs-lab/node_modules
+  - node_modules
+  - vendor
+  - Gemfile
+  - Gemfile.lock
