@@ -27,14 +27,14 @@
         {
           "name": "Nodejs",
           "files": [
-            { "name": "Server.js", "path": "todo/index.html" }
+            { "name": "Server.js", "path": " https://awt-01-9lrh.onrender.com/" }
 
           ]
         },
         {
           "name": "Todo",
           "files": [
-            { "name": "index.html", "path": "https://awt-01-9lrh.onrender.com/" }
+            { "name": "index.html", "path": "todo/index.html" }
 
           ]
         }
