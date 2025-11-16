@@ -1,6 +1,23 @@
+title: AWT Project
+description: My GitHub Pages Site
+theme: jekyll-theme-primer
+
+# Do NOT build unnecessary folders
 exclude:
-  - Nodejs-lab/node_modules
   - node_modules
+  - Nodejs-lab/node_modules
   - vendor
   - Gemfile
   - Gemfile.lock
+  - package.json
+  - package-lock.json
+
+# GitHub Pages plugins (enabled automatically)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-relative-links
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
