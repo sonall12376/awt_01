@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="s.css">
+  <title>To-do App (jQuery)</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+  <h1>TO-DO APP</h1>
+  <input type="text" placeholder="write your task here" id="addTAsk">
+  <button id="addbtn">Add</button>
+  <ul id="taskList"></ul>
+
+  <script>
+    function loadTasks() {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      $("#taskList").empty();
+
+      tasks.forEach(function(task, index) {
+        $("#taskList").append(`
+          <li>
+            <span>${task}</span>
+            <button onclick="doneTask(${index})">Done</button>
+            <button onclick="deleteTask(${index})">Delete</button>
+          </li>
+        `);
+      });
+    }
+
+    // Add task
+    $("#addbtn").click(function() {
+      let task = $("#addTAsk").val();
+      if (task.trim() !== "") {
+        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.push(task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        $("#addTAsk").val("");
+        loadTasks();
+      }
+    });
+
+    // Delete task
+    function deleteTask(index) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // Mark task as done
+    function doneTask(index) {
+      let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      tasks[index] = "✔️ " + tasks[index];
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // Load saved tasks when page opens
+    loadTasks();
+  </script>
+</body>
+</html>

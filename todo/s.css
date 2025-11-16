@@ -1,0 +1,128 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 60px;
+  color: #333;
+}
+
+/* Page title */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #222;
+  letter-spacing: 1px;
+}
+
+/* Input and button layout */
+#addTAsk {
+  width: 300px;
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#addTAsk:focus {
+  border-color: #6a5acd;
+}
+
+/* Add button */
+#addbtn {
+  margin-left: 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #6a5acd;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#addbtn:hover {
+  background-color: #5a4fcf;
+}
+
+/* Task list */
+#taskList {
+  list-style: none;
+  margin-top: 25px;
+  width: 380px;
+  padding: 0;
+}
+
+/* Each task item */
+#taskList li {
+  background-color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+#taskList li:hover {
+  transform: scale(1.02);
+}
+
+/* Task text */
+#taskList li span {
+  flex: 1;
+  font-size: 16px;
+}
+
+/* Done button */
+#taskList button:nth-child(2) {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#taskList button:nth-child(2):hover {
+  background-color: #218838;
+}
+
+/* Delete button */
+#taskList button:nth-child(3) {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#taskList button:nth-child(3):hover {
+  background-color: #c82333;
+}
+
+/* When a task is marked done */
+.done {
+  text-decoration: line-through;
+  color: gray;
+  opacity: 0.7;
+}
