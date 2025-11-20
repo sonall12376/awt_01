@@ -51,7 +51,10 @@
         { "name": "Experiment 5&6", "path":"https://awt-01-2.onrender.com" },
         { "name": "Experiment 7-session", "path":"https://awt-01-13.onrender.com"},
         { "name": "Experiment 7-cookie", "path":"https://awt-01-12.onrender.com" },
-        { "name": "Session-cookie-demo", "path":" https://awt-01-6.onrender.com" }
+        { "name": "Session-cookie-demo", "path":" https://awt-01-6.onrender.com" },
+        { "name": "Experiment 8", "path":"https://awt-01-2.onrender.com" },
+        { "name": "Experiment 9", "path":"" },
+        { "name": "Experiment 10", "path":"" }
 
       ]
     }

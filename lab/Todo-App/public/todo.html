@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Todos</title>
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <h1>Your ToDo List</h1>
+
+  <form action="/add-task" method="POST">
+    <input name="task" placeholder="Enter task" required>
+    <button>Add</button>
+  </form>
+
+  <h3>Your Tasks</h3>
+  <ul id="taskList"></ul>
+
+  <a href="/logout">Logout</a>
+
+<script>
+async function loadTodos() {
+  const res = await fetch("/get-todos");
+  const todos = await res.json();
+
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  todos.forEach(t => {
+    list.innerHTML += `<li>${t.task}</li>`;
+  });
+}
+
+loadTodos();
+</script>
+</body>
+</html>
