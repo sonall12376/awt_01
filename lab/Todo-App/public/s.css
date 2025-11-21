@@ -2,74 +2,70 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
+/* Background */
 body {
-  background: linear-gradient(to right, #5b2cff, #327dff);
-  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  padding: 60px 0;          /* Added padding so Signup stays visible */
+  gap: 50px;                /* Space between Signup and Login */
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-}
-
-.form-box {
-  width: 45%;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-
-.form-box h2 {
+/* Title */
+h2 {
+  color: #ffffff;
+  font-size: 32px;
+  letter-spacing: 1px;
   text-align: center;
-  color: white;
-  margin-bottom: 20px;
-  font-size: 28px;
+  margin-bottom: 10px;
 }
 
+/* Form box */
+form {
+  width: 380px;              /* Increased width */
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs */
 input {
-  width: 100%;
   padding: 14px;
-  margin: 10px 0;
-  border-radius: 8px;
+  margin: 12px 0;
+  border-radius: 10px;
   border: none;
   font-size: 16px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.7);
 }
 
+input:focus {
+  background: #fff;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+/* Buttons */
 button {
-  width: 100%;
   padding: 14px;
-  background: #7300ff;
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
   color: white;
-  border-radius: 8px;
-  border: none;
+  border-radius: 10px;
   font-size: 18px;
+  border: none;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 14px;
+  transition: 0.3s ease;
 }
 
 button:hover {
-  background: #5500cc;
-}
-
-/* Responsive (mobile) */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .form-box {
-    width: 90%;
-  }
+  transform: translateY(-2px);
+  background: linear-gradient(to right, #7b1dda, #3800c8);
 }

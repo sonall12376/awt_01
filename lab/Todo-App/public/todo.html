@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="todo.css">
 </head>
 <body>
+
   <h1>Your ToDo List</h1>
 
   <form action="/add-task" method="POST">
@@ -26,11 +27,39 @@ async function loadTodos() {
   list.innerHTML = "";
 
   todos.forEach(t => {
-    list.innerHTML += `<li>${t.task}</li>`;
+  list.innerHTML += `
+    <li>
+      <span class="task-text">${t.task}</span>
+      <div class="btn-group">
+        <button class="task-btn edit-btn" onclick="editTask('${t._id}', '${t.task}')">Edit</button>
+        <button class="task-btn delete-btn" onclick="deleteTask('${t._id}')">Delete</button>
+      </div>
+    </li>
+  `;
+});
+
+}
+
+async function deleteTask(id) {
+  await fetch(`/delete-task/${id}`, { method: "DELETE" });
+  loadTodos();
+}
+
+async function editTask(id, oldTask) {
+  const newTask = prompt("Enter updated task", oldTask);
+  if (!newTask) return;
+
+  await fetch(`/edit-task/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: newTask })
   });
+
+  loadTodos();
 }
 
 loadTodos();
 </script>
+
 </body>
 </html>
