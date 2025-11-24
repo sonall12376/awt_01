@@ -22,7 +22,7 @@ app.use(
 
 // MongoDB connection
 mongoose
-  .connect("mongodb://localhost:27017/Todo-App")
+  .connect("mongodb+srv://SonalH:Todo2319@cluster0.chtiqsm.mongodb.net/Todo-App?retryWrites=true&w=majority&appName=Cluster0")
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
