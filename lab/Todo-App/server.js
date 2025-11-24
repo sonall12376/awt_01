@@ -44,12 +44,12 @@ const todoSchema = new mongoose.Schema({
 
 const Todo = mongoose.model("Todo", todoSchema);
 
-// ====================== LOGIN / SIGNUP PAGE =======================
+// LOGIN / SIGNUP PAGE 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
-// ====================== SIGNUP =======================
+//  SIGNUP
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -84,7 +84,7 @@ app.post("/signup", async (req, res) => {
   res.redirect("/todo");
 });
 
-// ====================== LOGIN =======================
+//  LOGIN 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -106,13 +106,13 @@ app.post("/login", async (req, res) => {
   res.redirect("/todo");
 });
 
-// ====================== TODO PAGE =======================
+// TODO PAGE 
 app.get("/todo", async (req, res) => {
   if (!req.session.userId) return res.redirect("/");
   res.sendFile(__dirname + "/public/todo.html");
 });
 
-// ====================== ADD TODO =======================
+// ADD TODO 
 app.post("/add-task", async (req, res) => {
   if (!req.session.userId) return res.redirect("/");
 
@@ -125,7 +125,7 @@ app.post("/add-task", async (req, res) => {
   res.redirect("/todo");
 });
 
-// ====================== GET USER TODOS =======================
+//  GET USER TODOS 
 app.get("/get-todos", async (req, res) => {
   if (!req.session.userId) return res.json([]);
 
@@ -133,7 +133,7 @@ app.get("/get-todos", async (req, res) => {
   res.json(tasks);
 });
 
-// ====================== DELETE TODO =======================
+//  DELETE TODO 
 app.delete("/delete-task/:id", async (req, res) => {
   if (!req.session.userId) return res.sendStatus(401);
 
@@ -141,7 +141,7 @@ app.delete("/delete-task/:id", async (req, res) => {
   res.sendStatus(200);
 });
 
-// ====================== EDIT TODO =======================
+// EDIT TODO 
 app.put("/edit-task/:id", async (req, res) => {
   if (!req.session.userId) return res.sendStatus(401);
 
@@ -153,7 +153,7 @@ app.put("/edit-task/:id", async (req, res) => {
   res.sendStatus(200);
 });
 
-// ====================== LOGOUT =======================
+//  LOGOUT 
 app.get("/logout", (req, res) => {
   req.session.destroy();
   res.redirect("/");
