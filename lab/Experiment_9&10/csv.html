@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 10: CSV Graph</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+
+<h1>Experiment 10: CSV → Graph using D3.js</h1>
+
+<svg width="500" height="300"></svg>
+
+<script>
+const svg = d3.select("svg");
+const width = 500;
+const height = 300;
+const barWidth = 50;
+
+d3.csv("data.csv").then(data => {
+
+  data.forEach(d => d.value = +d.value);
+
+  svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => i * (barWidth + 10))
+    .attr("y", d => height - d.value * 5)
+    .attr("width", barWidth)
+    .attr("height", d => d.value * 5)
+    .attr("fill", "teal");
+
+  svg.selectAll("text")
+    .data(data)
+    .enter()
+    .append("text")
+    .text(d => d.name)
+    .attr("x", (d, i) => i * (barWidth + 10) + 15)
+    .attr("y", height - 5)
+    .attr("fill", "black");
+});
+</script>
+
+</body>
+</html>

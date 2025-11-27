@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Management</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 30px;
+      background: #f5f7fa;
+    }
+    h2 {
+      color: #003366;
+      border-left: 5px solid #003366;
+      padding-left: 10px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0055a5;
+    }
+    table {
+      width: 80%;
+      margin-top: 15px;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px #ccc;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #003366;
+      color: white;
+    }
+    .highlight {
+      background: yellow !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Add Student</h2>
+
+<form id="addForm">
+  <input type="text" name="name" placeholder="Name" required><br>
+  <input type="number" name="roll" placeholder="Roll" required><br>
+  <input type="text" name="branch" placeholder="Branch" required><br>
+  <input type="number" name="year" placeholder="Year" required><br>
+  <button type="submit">Add Student</button>
+</form>
+
+<hr><br>
+
+<h2>Search Student</h2>
+<input type="text" id="searchBox" placeholder="Enter name or roll" onkeyup="highlightSearch()">
+<button onclick="highlightSearch()">Search</button>
+
+<hr><br>
+
+<h2>All Students</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Roll</th>
+      <th>Branch</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody id="studentTable"></tbody>
+</table>
+
+<!-- Single JS file only -->
+<script src="student.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Center</title>
+  <link rel="stylesheet" href="s.css">
+</head>
+<body>
+
+<h1>Shopping Center Management</h1>
+
+<h2>Add Item</h2>
+<form id="addForm">
+  <input name="name" placeholder="Item Name" required><br>
+  <input name="price" placeholder="Price" type="number" required><br>
+  <input name="quantity" placeholder="Quantity" type="number" required><br>
+  <button type="submit">Add Item</button>
+</form>
+
+<h2>Stock Report</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th><th>Price</th><th>Qty</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="itemTable"></tbody>
+</table>
+
+<script src="item.js"></script>
+</body>
+</html>

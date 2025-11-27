@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 9: Combined Visualizations</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+section {
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+}
+h2 { color: #003366; }
+button { padding: 8px 15px; margin-right: 10px; }
+</style>
+</head>
+
+<body>
+
+<h1>Experiment 9: SVG + D3 (Combined)</h1>
+
+<!-- ====================================================== -->
+<!-- =============== 1. BAR CHART ========================= -->
+<!-- ====================================================== -->
+<section>
+<h2>1. Bar Chart using SVG + D3.js</h2>
+<svg id="barChart" width="500" height="250"></svg>
+
+<script>
+const data = [10, 30, 20, 40, 25];
+
+const svg1 = d3.select("#barChart");
+const height1 = 250;
+const barWidth = 50;
+
+svg1.selectAll("rect")
+  .data(data)
+  .enter()
+  .append("rect")
+  .attr("x", (d, i) => i * (barWidth + 10))
+  .attr("y", d => height1 - d * 5)
+  .attr("width", barWidth)
+  .attr("height", d => d * 5)
+  .attr("fill", "steelblue");
+</script>
+</section>
+
+
+<!-- ====================================================== -->
+<!-- =============== 2. INTERACTIVE SHAPES ================ -->
+<!-- ====================================================== -->
+<section>
+<h2>2. Interactive Shapes (Circles & Rectangles)</h2>
+
+<svg id="shapes" width="500" height="250"></svg>
+
+<script>
+const svg2 = d3.select("#shapes");
+
+// Circle
+svg2.append("circle")
+  .attr("cx", 100)
+  .attr("cy", 120)
+  .attr("r", 40)
+  .attr("fill", "orange")
+  .on("mouseover", () => d3.select("circle").attr("fill", "red"))
+  .on("mouseout", () => d3.select("circle").attr("fill", "orange"));
+
+// Rectangle
+svg2.append("rect")
+  .attr("x", 200)
+  .attr("y", 100)
+  .attr("width", 80)
+  .attr("height", 60)
+  .attr("fill", "green")
+  .on("click", function(){ d3.select(this).attr("fill", "purple"); });
+</script>
+</section>
+
+
+<!-- ====================================================== -->
+<!-- ============ 3. MODIFY ELEMENT USING D3 ============= -->
+<!-- ====================================================== -->
+<section>
+<h2>3. Modify Selected Element</h2>
+
+<svg id="mod" width="400" height="200">
+  <circle id="myCircle" cx="150" cy="100" r="50" fill="blue"></circle>
+</svg>
+
+<button onclick="changeColor()">Change Color</button>
+<button onclick="increaseSize()">Increase Size</button>
+
+<script>
+function changeColor() {
+  d3.select("#myCircle").attr("fill", "red");
+}
+
+function increaseSize() {
+  d3.select("#myCircle").attr("r", 80);
+}
+</script>
+
+</section>
+
+</body>
+</html>
