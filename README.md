@@ -951,6 +951,831 @@ app.listen(PORT, () => {
 
 ---
 
+## Experiment 8
+*Topic: NodeJS + MongoDB Integration, CRUD Operations.
+*Files:* item.js, server.js, item.html,s.css ,student.html,student.js.
+
+*What I learned:*
+- Creating a NodeJS application to connect to a MongoDB database
+- Creating an application to store student details in a database
+- Creating a search application to find students based on criteria
+- Creating a shopping center application with full CRUD features
+
+**Code**
+
+**shopping-app**
+
+#### item.html
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Center</title>
+  <link rel="stylesheet" href="s.css">
+</head>
+<body>
+
+<h1>Shopping Center Management</h1>
+
+<h2>Add Item</h2>
+<form id="addForm">
+  <input name="name" placeholder="Item Name" required><br>
+  <input name="price" placeholder="Price" type="number" required><br>
+  <input name="quantity" placeholder="Quantity" type="number" required><br>
+  <button type="submit">Add Item</button>
+</form>
+
+<h2>Stock Report</h2>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th><th>Price</th><th>Qty</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="itemTable"></tbody>
+</table>
+
+<script src="item.js"></script>
+</body>
+</html>
+
+```
+
+#### s.css
+```CSS
+/* ---------- GLOBAL ---------- */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 40px;
+}
+
+h1, h2 {
+  color: #222;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* ---------- FORM AREA ---------- */
+form input {
+  width: 280px;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 18px;
+  background: #0051a8;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #003d82;
+}
+
+/* ---------- TABLE ---------- */
+table {
+  width: 100%;
+  background: #fff;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+th {
+  background: #0051a8;
+  color: #fff;
+  padding: 14px;
+  font-size: 16px;
+  text-align: left;
+}
+
+td {
+  padding: 14px;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+/* row hover */
+tr:hover {
+  background: #f2f7ff;
+}
+
+/* buttons inside table */
+.action-btn {
+  padding: 6px 14px;
+  margin-right: 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+.delete-btn {
+  background: #d9534f;
+  color: white;
+}
+
+.update-btn {
+  background: #0275d8;
+  color: white;
+}
+
+.sale-btn {
+  background: #5cb85c;
+  color: white;
+}
+
+.delete-btn:hover { background: #c9302c; }
+.update-btn:hover { background: #025aa5; }
+.sale-btn:hover   { background: #449d44; }
+
+/* ---------- TABLE EMPTY STATE ---------- */
+.empty {
+  text-align: center;
+  padding: 20px;
+  color: gray;
+  font-style: italic;
+  font-size: 18px;
+}
+
+```
+#### item.js
+```JS
+// Load stock
+async function loadItems() {
+    let res = await fetch("/items");
+    let items = await res.json();
+
+    let table = document.getElementById("itemTable");
+    table.innerHTML = "";
+
+    items.forEach(i => {
+        table.innerHTML += `
+        <tr>
+            <td>${i.name}</td>
+            <td>${i.price}</td>
+            <td>${i.quantity}</td>
+            <td>
+                <button onclick="deleteItem('${i._id}')">Delete</button>
+                <button onclick="updateItem('${i._id}')">Update</button>
+                <button onclick="saleItem('${i._id}')">Sale</button>
+            </td>
+        </tr>`;
+    });
+}
+loadItems();
+
+// Add item
+document.getElementById("addForm").addEventListener("submit", async e => {
+    e.preventDefault();
+
+    let data = Object.fromEntries(new FormData(e.target).entries());
+
+    await fetch("/items/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    e.target.reset();
+    loadItems();
+});
+
+// Delete
+async function deleteItem(id) {
+    await fetch(`/items/delete/${id}`, { method: "DELETE" });
+    loadItems();
+}
+
+// Update
+async function updateItem(id) {
+    let price = prompt("Enter new price:");
+    let qty = prompt("Enter new quantity:");
+
+    await fetch(`/items/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ price, quantity: qty })
+    });
+
+    loadItems();
+}
+
+// Sale
+async function saleItem(id) {
+    let qty = prompt("Enter quantity sold:");
+
+    await fetch(`/items/sale/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quantity: qty })
+    });
+
+    loadItems();
+}
+```
+
+#### server.js
+```JS
+
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname));
+
+// MongoDB Connection
+mongoose.connect("mongodb://127.0.0.1:27017/shopDB")
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
+// Schema
+const itemSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  quantity: Number
+});
+
+const Item = mongoose.model("Item", itemSchema);
+
+// Serve UI
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "item.html"));
+});
+
+// Add Item
+app.post("/items/add", async (req, res) => {
+  let item = new Item(req.body);
+  await item.save();
+  res.json({ success: true });
+});
+
+// Get All Items (Stock Report)
+app.get("/items", async (req, res) => {
+  let items = await Item.find();
+  res.json(items);
+});
+
+// Delete Item
+app.delete("/items/delete/:id", async (req, res) => {
+  await Item.findByIdAndDelete(req.params.id);
+  res.json({ success: true });
+});
+
+// Update Item
+app.put("/items/update/:id", async (req, res) => {
+  await Item.findByIdAndUpdate(req.params.id, req.body);
+  res.json({ success: true });
+});
+
+// Sale (reduce quantity)
+app.put("/items/sale/:id", async (req, res) => {
+  let item = await Item.findById(req.params.id);
+  if (!item) return res.json({ success: false });
+
+  let qty = Number(req.body.quantity);
+  if (item.quantity < qty)
+    return res.json({ success: false, msg: "Not enough stock" });
+
+  item.quantity -= qty;
+  await item.save();
+
+  res.json({ success: true });
+});
+
+app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+
+```
+**code**
+
+**student-app**
+
+#### item.html
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Management</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      padding: 30px;
+      background: #f5f7fa;
+    }
+    h2 {
+      color: #003366;
+      border-left: 5px solid #003366;
+      padding-left: 10px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px 0;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      background: #003366;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0055a5;
+    }
+    table {
+      width: 80%;
+      margin-top: 15px;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px #ccc;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #003366;
+      color: white;
+    }
+    .highlight {
+      background: yellow !important;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Add Student</h2>
+
+<form id="addForm">
+  <input type="text" name="name" placeholder="Name" required><br>
+  <input type="number" name="roll" placeholder="Roll" required><br>
+  <input type="text" name="branch" placeholder="Branch" required><br>
+  <input type="number" name="year" placeholder="Year" required><br>
+  <button type="submit">Add Student</button>
+</form>
+
+<hr><br>
+
+<h2>Search Student</h2>
+<input type="text" id="searchBox" placeholder="Enter name or roll" onkeyup="highlightSearch()">
+<button onclick="highlightSearch()">Search</button>
+
+<hr><br>
+
+<h2>All Students</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Roll</th>
+      <th>Branch</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody id="studentTable"></tbody>
+</table>
+
+<!-- Single JS file only -->
+<script src="student.js"></script>
+
+</body>
+</html>
+
+
+```
+
+#### student.js
+```JS
+// ADD student
+document.getElementById("addForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  let data = Object.fromEntries(new FormData(e.target).entries());
+
+  let res = await fetch("/students/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  let result = await res.json();
+  if (result.success) {
+    alert("Student Added!");
+    e.target.reset();
+    loadStudents();
+  }
+});
+
+// LOAD all students
+async function loadStudents() {
+  let res = await fetch("/students");
+  let students = await res.json();
+
+  let table = document.getElementById("studentTable");
+  table.innerHTML = "";
+
+  students.forEach(s => {
+    table.innerHTML += `
+      <tr>
+        <td>${s.name}</td>
+        <td>${s.roll}</td>
+        <td>${s.branch}</td>
+        <td>${s.year}</td>
+      </tr>
+    `;
+  });
+}
+loadStudents();
+
+// HIGHLIGHT SEARCH
+async function highlightSearch() {
+  let keyword = document.getElementById("searchBox").value.toLowerCase();
+
+  let rows = document.querySelectorAll("#studentTable tr");
+
+  rows.forEach(row => row.classList.remove("highlight"));
+
+  if (keyword === "") return;
+
+  rows.forEach(row => {
+    let name = row.children[0].textContent.toLowerCase();
+    let roll = row.children[1].textContent.toLowerCase();
+
+    if (name.includes(keyword) || roll.includes(keyword)) {
+      row.classList.add("highlight");
+    }
+  });
+}
+
+```
+
+#### server.js
+```JS
+
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+
+const app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(__dirname));
+
+// MongoDB Connection
+mongoose.connect("mongodb://127.0.0.1:27017/studentDB")
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
+// Schema
+const studentSchema = new mongoose.Schema({
+  name: String,
+  roll: Number,
+  branch: String,
+  year: Number
+});
+
+const Student = mongoose.model("Student", studentSchema);
+
+// Serve the HTML page
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "student.html"));
+});
+
+// Add student
+app.post("/students/add", async (req, res) => {
+  try {
+    await Student.create(req.body);
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false, error: err });
+  }
+});
+
+// Get all students
+app.get("/students", async (req, res) => {
+  const students = await Student.find();
+  res.json(students);
+});
+
+// Search student (optional)
+app.get("/students/search", async (req, res) => {
+  const q = req.query.q;
+
+  const result = await Student.find({
+    $or: [
+      { name: { $regex: q, $options: "i" } },
+      { roll: Number(q) }
+    ]
+  });
+
+  res.json(result);
+});
+
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
+});
+
+
+
+### output
+![Output Screenshot](Output-awt-lab/exp-8-shopping.png)  
+![Output Screenshot](Output-awt-lab/exp-8-student.png)  
+
+*Challenges faced:*
+- Understanding how async/await works with database operations.
+- Forgetting to use express.urlencoded() which caused form data to not reach the backend.
+- Schema mistakes like missing fields or wrong data types.
+- Difficulty connecting to MongoDB Cloud due to IP access settings.
+
+---
+
+## Experiment 9&10
+*Topic:* SVG Basics, D3.js Visualizations, Interactive Graphics, CSV Data Handling
+*Files:* csv.html,data.csv,exp.htm,index.html
+
+*What I learned:*
+- Creating a bar chart using SVG and D3.js
+- Selecting and modifying particular elements using D3
+- Creating circles and rectangles as interactive controls
+- Fetching data from CSV and creating a graph
+
+**Code**
+
+#### csv.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 10: CSV Graph</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+
+<h1>Experiment 10: CSV → Graph using D3.js</h1>
+
+<svg width="500" height="300"></svg>
+
+<script>
+const svg = d3.select("svg");
+const width = 500;
+const height = 300;
+const barWidth = 50;
+
+d3.csv("data.csv").then(data => {
+
+  data.forEach(d => d.value = +d.value);
+
+  svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => i * (barWidth + 10))
+    .attr("y", d => height - d.value * 5)
+    .attr("width", barWidth)
+    .attr("height", d => d.value * 5)
+    .attr("fill", "teal");
+
+  svg.selectAll("text")
+    .data(data)
+    .enter()
+    .append("text")
+    .text(d => d.name)
+    .attr("x", (d, i) => i * (barWidth + 10) + 15)
+    .attr("y", height - 5)
+    .attr("fill", "black");
+});
+</script>
+
+</body>
+</html>
+
+
+```
+
+#### data.csv
+```CSS
+name,value
+A,10
+B,20
+C,15
+D,25
+
+
+```
+#### exp.html
+```JS
+<!DOCTYPE html>
+<html>
+<head>
+<title>Experiment 9: Combined Visualizations</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+<style>
+section {
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+}
+h2 { color: #003366; }
+button { padding: 8px 15px; margin-right: 10px; }
+</style>
+</head>
+
+<body>
+
+<h1>Experiment 9: SVG + D3 (Combined)</h1>
+
+<!-- ====================================================== -->
+<!-- =============== 1. BAR CHART ========================= -->
+<!-- ====================================================== -->
+<section>
+<h2>1. Bar Chart using SVG + D3.js</h2>
+<svg id="barChart" width="500" height="250"></svg>
+
+<script>
+const data = [10, 30, 20, 40, 25];
+
+const svg1 = d3.select("#barChart");
+const height1 = 250;
+const barWidth = 50;
+
+svg1.selectAll("rect")
+  .data(data)
+  .enter()
+  .append("rect")
+  .attr("x", (d, i) => i * (barWidth + 10))
+  .attr("y", d => height1 - d * 5)
+  .attr("width", barWidth)
+  .attr("height", d => d * 5)
+  .attr("fill", "steelblue");
+</script>
+</section>
+
+
+<!-- ====================================================== -->
+<!-- =============== 2. INTERACTIVE SHAPES ================ -->
+<!-- ====================================================== -->
+<section>
+<h2>2. Interactive Shapes (Circles & Rectangles)</h2>
+
+<svg id="shapes" width="500" height="250"></svg>
+
+<script>
+const svg2 = d3.select("#shapes");
+
+// Circle
+svg2.append("circle")
+  .attr("cx", 100)
+  .attr("cy", 120)
+  .attr("r", 40)
+  .attr("fill", "orange")
+  .on("mouseover", () => d3.select("circle").attr("fill", "red"))
+  .on("mouseout", () => d3.select("circle").attr("fill", "orange"));
+
+// Rectangle
+svg2.append("rect")
+  .attr("x", 200)
+  .attr("y", 100)
+  .attr("width", 80)
+  .attr("height", 60)
+  .attr("fill", "green")
+  .on("click", function(){ d3.select(this).attr("fill", "purple"); });
+</script>
+</section>
+
+
+<!-- ====================================================== -->
+<!-- ============ 3. MODIFY ELEMENT USING D3 ============= -->
+<!-- ====================================================== -->
+<section>
+<h2>3. Modify Selected Element</h2>
+
+<svg id="mod" width="400" height="200">
+  <circle id="myCircle" cx="150" cy="100" r="50" fill="blue"></circle>
+</svg>
+
+<button onclick="changeColor()">Change Color</button>
+<button onclick="increaseSize()">Increase Size</button>
+
+<script>
+function changeColor() {
+  d3.select("#myCircle").attr("fill", "red");
+}
+
+function increaseSize() {
+  d3.select("#myCircle").attr("r", 80);
+}
+</script>
+
+</section>
+
+</body>
+</html>
+
+```
+
+#### index.html
+```JS
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Data Visualization Experiments</title>
+
+<style>
+body {
+  font-family: Arial;
+  padding: 40px;
+  background: #f5f7fa;
+}
+.box {
+  border: 2px solid #003366;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
+  margin-bottom: 20px;
+  background: white;
+}
+a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  background: #003366;
+  padding: 10px;
+  text-align: center;
+  border-radius: 6px;
+}
+a:hover { background: #0055a5; }
+</style>
+</head>
+
+<body>
+
+<h1>Data Visualization - Experiment 9 & 10</h1>
+
+<div class="box">
+  <h3>Experiment 9 (Combined)</h3>
+  <p>Bar Chart + Interactive Shapes + Modify SVG Element</p>
+  <a href="exp.html">Open Experiment 9</a>
+</div>
+
+<div class="box">
+  <h3>Experiment 10</h3>
+  <p>CSV → Graph using D3</p>
+  <a href="csv.html">Open Experiment 10</a>
+</div>
+
+</body>
+</html>
+
+```
+### output
+![Output Screenshot](Output-awt-lab/exp9.1.png)  
+![Output Screenshot](Output-awt-lab/exp9.2.png)  
+![Output Screenshot](Output-awt-lab/exp10.png)  
+
+*Challenges faced:*
+- Understanding the enter-update-exit pattern of D3.js
+- Forgetting to include the D3 script link (leading to "d3 is not defined" errors).
+- Getting confused between pixel values and scale values.
+-Difficulty in making interactions (click/hover) work correctly.
+
 ## Conclusion
 This lab helped me gain hands-on experience in *front-end and back-end web development*.  
 I learned how to:
