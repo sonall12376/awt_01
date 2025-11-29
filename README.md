@@ -7,7 +7,7 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 1. [Experiment 1](#-experiment-1)
 2. [Experiment 2](#-experiment-2)
 3. [Experiment 3](#-experiment-3)
