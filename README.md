@@ -15,7 +15,9 @@ Each experiment focuses on different web technologies including HTML, CSS, JavaS
 5. [Experiment 5](#-experiment-5)
 6. [Experiment 5_6](#-experiment-5_6)
 7. [Experiment 7](#-experiment-7)
-8. [Conclusion](#-conclusion)
+8. [Experiment 7](#-experiment-8)
+9. [Experiment 7](#-experiment-9&10)
+10. [Conclusion](#-conclusion)
 
 ---
 
