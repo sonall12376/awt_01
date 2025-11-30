@@ -52,7 +52,8 @@
         { "name": "Experiment 7-session", "path":"https://awt-01-13.onrender.com"},
         { "name": "Experiment 7-cookie", "path":"https://awt-01-12.onrender.com" },
         { "name": "Session-cookie-demo", "path":" https://awt-01-6.onrender.com" },
-        { "name": "Experiment 8", "path":"lab/Experiment_8/index.html" },
+        { "name": "Experiment 8-shoppingApp", "path":"https://awt-01-17.onrender.com" },
+        { "name": "Experiment 8-studentApp", "path":"https://awt-01-18.onrender.com" },
         { "name": "Experiment 9&10", "path":"lab/Experiment_9&10/index.html" },
         { "name": "User_management", "path":"https://awt-01-15.onrender.com" },
         { "name": "Todo-App", "path": "https://awt-01-16.onrender.com" }
